@@ -1,0 +1,25 @@
+$purple: #7a5ea3;
+$grey: #464a55;
+$dark-grey: #2f333e;
+$white: #ffffff;
+
+
+.toolbar {
+    &__container {
+        height: 100vh;
+    }
+}
+
+mat-sidenav {
+    width: 85%;
+    background: $grey;
+    mat-list {
+        a { 
+            color: $white;
+        }
+    }
+}
+
+.mat-toolbar.mat-primary {
+    background: $grey;
+}

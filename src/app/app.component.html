@@ -1,9 +1,20 @@
-<h1>Header</h1>
-
-<router-outlet></router-outlet>
-
-<nav>
-    <a routerLink="/video">Anterior</a>
-    <a routerLink="/video">Próximo</a>
-</nav>
-
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-list>
+        <a *ngFor="let route of routes"
+        mat-list-item  
+        [routerLink]="route.path" 
+        (click)="sidenav.toggle()"> {{route.label}}</a>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="toolbar__container">
+      <mat-toolbar color="primary">
+        <button mat-icon-button aria-label="Menu" (click)="sidenav.open()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

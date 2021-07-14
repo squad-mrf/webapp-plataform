@@ -1,10 +1,27 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
+    <section class="sidenav-header">
+      
+      <button mat-icon-button aria-label="Menu" (click)="sidenav.toggle()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <h2>Navegue por todo o conteúdo do curso</h2>
+
+    </section>
+
     <mat-list>
-        <a *ngFor="let route of routes"
-        mat-list-item  
-        [routerLink]="route.path" 
-        (click)="sidenav.toggle()"> {{route.label}}</a>
+      <ng-container *ngFor="let item of data">
+        <p>{{item?.module_id}}</p>
+        <div mat-subheader>{{ item?.title }}</div>
+        <mat-list-item
+          *ngFor="let subitem of item?.class"
+          (click)="setVideoUrl(subitem?.url_youtube); sidenav.toggle()"
+        >
+          <mat-icon mat-list-icon>play_circle_outline</mat-icon>
+          <div mat-line>{{ subitem?.title }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </ng-container>
     </mat-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -14,7 +31,7 @@
           <mat-icon>menu</mat-icon>
         </button>
       </mat-toolbar>
-      <router-outlet></router-outlet>
+      <app-dashboard [videoUrl]="currentUrlVideo"></app-dashboard>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

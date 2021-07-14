@@ -1,5 +1,6 @@
 $purple: #7a5ea3;
 $grey: #464a55;
+$blue: #6785c1;
 $dark-grey: #2f333e;
 $white: #ffffff;
 
@@ -13,10 +14,12 @@ $white: #ffffff;
 mat-sidenav {
     width: 85%;
     background: $grey;
-    mat-list {
-        a { 
-            color: $white;
-        }
+    mat-list,
+    mat-list-item,
+    .mat-subheader,
+    mat-icon
+    {
+        color: $white;
     }
 }
 

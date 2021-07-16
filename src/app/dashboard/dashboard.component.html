@@ -1,1 +1,2 @@
-<video [src]="videoUrl" *ngIf="videoUrl" autoplay controls controlsList="nodownload"></video>
+<iframe *ngIf="videoUrl"  width="560" height="400" [src]="getSafeUrl()" frameborder="0"
+allowfullscreen></iframe>

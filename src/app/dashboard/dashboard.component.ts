@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,10 +9,16 @@ import { Component, Input, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
 
   @Input() videoUrl: string = "";
-
-  constructor() { }
+  constructor(private sanitizer: DomSanitizer){
+  }
 
   ngOnInit(): void {
   }
+
+  getSafeUrl() {
+    return this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/'+this.videoUrl);
+  }
+
+
 
 }

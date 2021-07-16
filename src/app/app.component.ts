@@ -14,12 +14,12 @@ export class AppComponent {
       class : [{
           class_id : "1",
           title : "O que é Scratch?",
-          url_youtube : "https://www.youtube.com/watch?v=2ydQ0MLM0N0&ab_channel=HIPHOPMIX"
+          url_youtube : "2ydQ0MLM0N0"
       },
       {
           class_id : "1",
           title : "O que é Scratch?",
-          url_youtube : "https://www.youtube.com/watch?v=2ydQ0MLM0N0&ab_channel=HIPHOPMIX"
+          url_youtube : "IS5qd5qR1xs"
       }]
   },
   {
@@ -27,7 +27,7 @@ export class AppComponent {
       title : "Crie sua conta",
       class : [{
           title : "O que é Scratch?",
-          url_youtube : "https://www.youtube.com/watch?v=2ydQ0MLM0N0&ab_channel=HIPHOPMIX"
+          url_youtube : "UgfsbL-uHOA"
       }]
   }];
 

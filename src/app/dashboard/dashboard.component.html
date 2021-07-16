@@ -1,2 +1,37 @@
-<iframe *ngIf="videoUrl"  width="560" height="400" [src]="getSafeUrl()" frameborder="0"
-allowfullscreen></iframe>
+<img class="absolute-image__top" src="assets/img/Elemento_Cabecalho.svg" alt="">
+<img class="absolute-image__bottom" src="assets/img/Elemento_Rodape.svg" alt="">
+
+<div class="dash__container">
+    <p class="dash__container_forum">Dúvidas? Pergunte no fórum!</p>
+    <button class="dash__container_forum-button" mat-stroked-button color="primary">Ir para o fórum</button>
+
+    <div class="dash__content">
+        <ng-container *ngIf="loading">
+
+        </ng-container>
+        <ng-container *ngIf="!loading">
+            <div class="dash__content_grid">
+                <div class="dash__content_grid-number">
+                    <p>{{class?.class_id}}</p>
+                </div>
+                <div class="dash__content_grid-titles">
+                    <p>{{module}}</p>
+                    <h2>{{class?.title}}</h2>
+                </div>
+            </div>
+           
+            <iframe *ngIf="class"  width="100%" height="200" [src]="getSafeUrl()" frameborder="0"
+            allowfullscreen></iframe>
+        </ng-container>
+        
+    </div>
+
+    <div class="dash__footer">
+        <button mat-raised-button>ANTERIOR</button>
+        <button mat-raised-button color="primary">PRÓXIMA</button>
+    </div>
+ 
+
+</div>
+
+

@@ -8,15 +8,23 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class DashboardComponent implements OnInit {
 
-  @Input() videoUrl: string = "";
+  @Input() class: any;
+  @Input() module: string = "";
+  videoId: string = "";
+  loading = false;
   constructor(private sanitizer: DomSanitizer){
   }
 
   ngOnInit(): void {
+    this.videoId = this.class.youtube__video_id;
   }
 
   getSafeUrl() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/'+this.videoUrl);
+    return this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/'+this.videoId);
+  }
+
+  changeClass() {
+    
   }
 
 

@@ -15,7 +15,7 @@
         <div mat-subheader>{{ item?.title }}</div>
         <mat-list-item
           *ngFor="let subitem of item?.class"
-          (click)="setVideoUrl(subitem?.url_youtube); sidenav.toggle()"
+          (click)="setClass(subitem, item.title); sidenav.toggle()"
         >
           <mat-icon mat-list-icon>play_circle_outline</mat-icon>
           <div mat-line>{{ subitem?.title }}</div>
@@ -30,8 +30,9 @@
         <button mat-icon-button aria-label="Menu" (click)="sidenav.open()">
           <mat-icon>menu</mat-icon>
         </button>
+        <img src="assets/img/everis_fundaciao_logo_br.svg" alt="">
       </mat-toolbar>
-      <app-dashboard [videoUrl]="currentUrlVideo"></app-dashboard>
+      <app-dashboard [class]="currentClass" [module]="currentModuleTitle"></app-dashboard>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

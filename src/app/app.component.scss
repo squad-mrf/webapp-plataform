@@ -25,4 +25,6 @@ mat-sidenav {
 
 .mat-toolbar.mat-primary {
     background: $grey;
+    height: 4rem;
+    justify-content: space-between;
 }

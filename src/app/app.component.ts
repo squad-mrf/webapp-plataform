@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'web-app';
+  currentClass: any;
+  currentModuleTitle: string = "";
   data: any = 
   [{
       module_id : 1,
@@ -14,12 +16,12 @@ export class AppComponent {
       class : [{
           class_id : "1",
           title : "O que é Scratch?",
-          url_youtube : "2ydQ0MLM0N0"
+          youtube__video_id : "09R8_2nJtjg"
       },
       {
           class_id : "1",
           title : "O que é Scratch?",
-          url_youtube : "IS5qd5qR1xs"
+          youtube__video_id : "09R8_2nJtjg"
       }]
   },
   {
@@ -27,17 +29,18 @@ export class AppComponent {
       title : "Crie sua conta",
       class : [{
           title : "O que é Scratch?",
-          url_youtube : "UgfsbL-uHOA"
+          youtube__video_id : "09R8_2nJtjg"
       }]
   }];
 
-  currentUrlVideo: string = "";
   
   ngOnInit(): void {
-    this.currentUrlVideo = this.data[0].class[0].url_youtube;
+    this.currentClass = this.data[0].class[0];
+    this.currentModuleTitle = this.data[0].title;
   } 
 
-  setVideoUrl(url: string) {
-    this.currentUrlVideo = url;
+  setClass(pickedClass: any, moduleTitle: string) {
+    this.currentClass = pickedClass;
+    this.currentModuleTitle = moduleTitle;
   }
 }

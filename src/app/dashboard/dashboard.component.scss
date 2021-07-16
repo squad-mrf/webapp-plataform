@@ -1,0 +1,64 @@
+.absolute-image{
+    &__top {
+        top: 100;
+        left: 0;
+        position: absolute;
+    }
+    &__bottom {
+        bottom: 0;
+        right: 0;
+        position: absolute;
+    }
+}
+
+.dash {
+    &__container {
+        position: relative;
+        background: #f5f5f5;
+        border-radius: 1rem;
+        height: auto;
+        padding: 1rem;
+        margin: 1rem;
+        &_forum {
+            margin: 0;
+            &-button {
+                padding: 0;
+                border: none;
+            }
+        }
+    }
+    &__content {
+        margin-top: 2rem;
+        &_grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            justify-content: center;
+            align-items: center;
+            grid-column-gap: .3rem;
+            &-number {
+                p {
+                    font-size: 3rem;
+                    font-weight: bold;
+                    color: #6785c1;
+                    margin-bottom: 1rem;
+                }
+            }
+            &-titles {
+                p {
+                    margin: 0;
+                }
+                h2 {
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+
+    &__footer {
+        margin-top: 2rem;
+        margin-bottom: 4rem;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+

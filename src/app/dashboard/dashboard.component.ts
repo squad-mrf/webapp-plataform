@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,22 +9,45 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class DashboardComponent implements OnInit {
 
   @Input() class: any;
-  @Input() module: string = "";
-  videoId: string = "";
+  @Input() module: any = {};
+  @Output() changeClass = new EventEmitter();
+
+  safeUrl: any;
   loading = false;
   constructor(private sanitizer: DomSanitizer){
   }
 
   ngOnInit(): void {
-    this.videoId = this.class.youtube__video_id;
+    this.safeUrl = null;
+    this.getSafeUrl();
+    console.log(this.module)
+
   }
 
   getSafeUrl() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/'+this.videoId);
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/'+this.class.youtube__video_id);
   }
 
-  changeClass() {
-    
+  isPrevDisabled() {
+    return this.module.id === 1 && this.class.class_id === "1";
+  }
+
+  next() {
+    this.change("next");
+  }
+
+  prev() {
+    this.change("prev");
+  }
+
+  change(type: string) {
+    this.changeClass.emit(
+      {
+        module: this.module, 
+        class: this.class,
+        type: type
+      }
+    );
   }
 
 

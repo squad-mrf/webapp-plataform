@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 const materialModules = [
@@ -13,7 +14,8 @@ const materialModules = [
   MatIconModule,
   MatToolbarModule,
   MatListModule,
-  MatButtonModule
+  MatButtonModule,
+  MatProgressSpinnerModule
 ]
 
 

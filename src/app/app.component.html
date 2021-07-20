@@ -1,21 +1,19 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
     <section class="sidenav-header">
-      
       <button mat-icon-button aria-label="Menu" (click)="sidenav.toggle()">
         <mat-icon>close</mat-icon>
       </button>
       <h2>Navegue por todo o conteúdo do curso</h2>
-
     </section>
 
     <mat-list>
-      <ng-container *ngFor="let item of data">
-        <p>{{item?.module_id}}</p>
-        <div mat-subheader>{{ item?.title }}</div>
+      <ng-container *ngFor="let module of data">
+        <p>{{ module?.module_id }}</p>
+        <div mat-subheader>{{ module?.title }}</div>
         <mat-list-item
-          *ngFor="let subitem of item?.class"
-          (click)="setClass(subitem, item.title); sidenav.toggle()"
+          *ngFor="let subitem of module?.class"
+          (click)="setClass(subitem, module); sidenav.toggle()"
         >
           <mat-icon mat-list-icon>play_circle_outline</mat-icon>
           <div mat-line>{{ subitem?.title }}</div>
@@ -30,9 +28,15 @@
         <button mat-icon-button aria-label="Menu" (click)="sidenav.open()">
           <mat-icon>menu</mat-icon>
         </button>
-        <img src="assets/img/everis_fundaciao_logo_br.svg" alt="">
+        <img src="assets/img/everis_fundaciao_logo_br.svg" alt="" />
       </mat-toolbar>
-      <app-dashboard [class]="currentClass" [module]="currentModuleTitle"></app-dashboard>
+      <app-dashboard
+        *ngIf="!loading"
+        [class]="currentClass"
+        (changeClass)="getClassChange($event)"
+        [module]="currentModule"
+      ></app-dashboard>
+      <mat-spinner *ngIf="loading" class="center-object"></mat-spinner>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

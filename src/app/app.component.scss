@@ -11,6 +11,12 @@ $white: #ffffff;
     }
 }
 
+.center-object {
+    width: 100%;
+    margin: 50% auto;
+    text-align: center;
+}
+
 mat-sidenav {
     width: 85%;
     background: $grey;

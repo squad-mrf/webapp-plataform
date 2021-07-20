@@ -15,20 +15,22 @@
                     <p>{{class?.class_id}}</p>
                 </div>
                 <div class="dash__content_grid-titles">
-                    <p>{{module}}</p>
+                    <p>{{module?.title}}</p>
                     <h2>{{class?.title}}</h2>
                 </div>
             </div>
            
-            <iframe *ngIf="class"  width="100%" height="200" [src]="getSafeUrl()" frameborder="0"
-            allowfullscreen></iframe>
+            <ng-container *ngIf="safeUrl">
+                <iframe width="100%" height="200" [src]="safeUrl" frameborder="0"
+                allowfullscreen></iframe>
+            </ng-container>
         </ng-container>
         
     </div>
 
     <div class="dash__footer">
-        <button mat-raised-button>ANTERIOR</button>
-        <button mat-raised-button color="primary">PRÓXIMA</button>
+        <button mat-raised-button [disabled]="isPrevDisabled()" (click)="prev()">ANTERIOR</button>
+        <button mat-raised-button color="primary" (click)="next()">PRÓXIMA</button>
     </div>
  
 

@@ -17,6 +17,64 @@ $white: #ffffff;
     text-align: center;
 }
 
+.module {
+    &__header {
+        background: #2f333e;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        justify-content: center;
+        align-items: center;
+        grid-column-gap: 1rem;
+        padding: 2rem;
+        &-number {
+                font-size: 3rem;
+                font-weight: bold;
+                color: #6785c1;
+                margin-bottom: 1rem;
+        }
+        &-titles {
+            p {
+                margin: 0;
+                color: #9b9da2;
+            }
+            h3 {
+                text-transform: uppercase;
+                font-family: Roboto, "Helvetica Neue", sans-serif;
+                font-size: 1.2rem;
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+.sidenav-header {
+    &__description {
+        margin: 1rem 4rem;
+    }
+    h2 {
+        color: $white;
+        text-transform: uppercase;
+        line-height: initial;
+        margin: 0 0 .6rem;
+    }
+    .close {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+    &_forum {
+        margin: 0;
+        color: #a3a5aa;
+        &-button {
+            padding: 0;
+            border: none;
+            color: #b897c4;
+            line-height: 0;
+            text-transform: uppercase;
+        }
+    }
+}
+
 mat-sidenav {
     width: 85%;
     background: $grey;
@@ -26,6 +84,12 @@ mat-sidenav {
     mat-icon
     {
         color: $white;
+    }
+
+    mat-list-item {
+        mat-icon {
+            color: #b897c4;
+        }
     }
 }
 

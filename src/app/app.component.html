@@ -1,16 +1,27 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
     <section class="sidenav-header">
-      <button mat-icon-button aria-label="Menu" (click)="sidenav.toggle()">
-        <mat-icon>close</mat-icon>
-      </button>
-      <h2>Navegue por todo o conteúdo do curso</h2>
+      <div class="close">
+        <button mat-icon-button aria-label="Menu" (click)="sidenav.toggle()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="sidenav-header__description">
+        <h2>Navegue por todo o conteúdo do curso</h2>
+        <p class="sidenav-header_forum">Dúvidas? Pergunte no fórum!</p>
+        <button class="sidenav-header_forum-button" mat-stroked-button color="primary">Ir para o fórum</button>
+      </div>
     </section>
 
-    <mat-list>
+    <mat-list class="module">
       <ng-container *ngFor="let module of data">
-        <p>{{ module?.module_id }}</p>
-        <div mat-subheader>{{ module?.title }}</div>
+        <div class="module__header">
+          <p class="module__header-number">{{ module?.module_id }}</p>
+          <div class="module__header-titles">
+              <p>Módulo</p>
+              <h3>{{ module?.title }}</h3>
+          </div>
+        </div>
         <mat-list-item
           *ngFor="let subitem of module?.class"
           (click)="setClass(subitem, module); sidenav.toggle()"

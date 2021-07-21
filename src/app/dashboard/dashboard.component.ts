@@ -10,6 +10,8 @@ export class DashboardComponent implements OnInit {
 
   @Input() class: any;
   @Input() module: any = {};
+  @Input() blockNext: any;
+  @Input() blockPrev: any;
   @Output() changeClass = new EventEmitter();
 
   safeUrl: any;
@@ -20,16 +22,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.safeUrl = null;
     this.getSafeUrl();
-    console.log(this.module)
-
   }
 
   getSafeUrl() {
     this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/'+this.class.youtube__video_id);
-  }
-
-  isPrevDisabled() {
-    return this.module.id === 1 && this.class.class_id === "1";
   }
 
   next() {

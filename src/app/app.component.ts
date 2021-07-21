@@ -9,52 +9,90 @@ export class AppComponent {
   title = 'web-app';
   currentClass: any;
   loading: boolean = true;
+  blockNext: boolean = false;
+  blockPrev: boolean = false;
   currentModule: any = {};
-  data: any = 
-  [{
-      module_id : 1,
-      title : "Conheça o Scratch",
-      class : [{
-          class_id : "1",
-          title : "O que é Scratch?",
-          youtube__video_id : "09R8_2nJtjg"
+  data: any =
+    [{
+      module_id: 1,
+      title: "Conheça o Scratch",
+      class: [{
+        class_id: 1,
+        title: "O que é Scratch?",
+        youtube__video_id: "09R8_2nJtjg"
       },
       {
-          class_id : "2",
-          title : "O que é Scratch?",
-          youtube__video_id : "09R8_2nJtjg"
+        class_id: 2,
+        title: "O que é Scratch2?",
+        youtube__video_id: "09R8_2nJtjg"
       }]
-  },
-  {
-      module_id : 2,
-      title : "Crie sua conta",
-      class : [{
-          class_id : "1",
-          title : "O que é Scratch?",
-          youtube__video_id : "zEe0AcpD6QM"
+    },
+    {
+      module_id: 2,
+      title: "Crie sua conta",
+      class: [{
+        class_id: 1,
+        title: "Crie 1?",
+        youtube__video_id: "zEe0AcpD6QM"
       }]
-  }];
+    }];
 
-  
+  paginationData: any = [];
+
+  constructor() {
+    this.data.forEach((res: any) => {
+      res.class.forEach((cl: any) => {
+        cl.moduleId = res.module_id;
+        cl.moduleTitle = res.title;
+        this.paginationData.push(cl);
+      })
+    })
+  }
+
+
   ngOnInit(): void {
-    this.currentClass = this.data[0].class[0];
-    this.currentModule = {
-      module_id: this.data[0].module_id,
-      title: this.data[0].title,
-    };
+    this.initialClass();
     this.hideLoading();
-  } 
+  }
+
+  initialClass() {
+    this.currentClass = this.paginationData[0];
+    this.currentModule = {
+      module_id: this.paginationData[0].module_id,
+      title: this.paginationData[0].title,
+    };
+    this.blockNext = false;
+    this.blockPrev = true;
+  }
 
   setClass(pickedClass: any, module: any) {
     this.loading = true;
-      if (pickedClass && module) {
-        this.currentClass = pickedClass;
-        this.currentModule = {
-          module_id: module.module_id,
-          title: module.title
-        };
-        this.hideLoading();
-      }
+    if (pickedClass && module) {
+      this.currentClass = pickedClass;
+      this.currentModule = {
+        module_id: module.module_id,
+        title: module.title
+      };
+      this.hideLoading();
+    }
+
+    this.blockingPaginationButtons(pickedClass);
+
+  }
+
+  blockingPaginationButtons(pickedClass: any) {
+    const paginationClass = this.getPageClass(pickedClass);
+
+    if (this.paginationData.indexOf(paginationClass) === this.paginationData.length - 1) {
+      this.blockPrev = false;
+      this.blockNext = true;
+    } else if (this.paginationData.indexOf(paginationClass) === 0) {
+      this.blockPrev = true;
+      this.blockNext = false;
+    } else {
+      this.blockPrev = false;
+      this.blockNext = false;
+    }
   }
 
   hideLoading() {
@@ -64,34 +102,43 @@ export class AppComponent {
   }
 
   getClassChange($event: any) {
-    console.log($event)
-    let currentModule = $event.module;
-    let currentClass = $event.class;
+    const currentClass = $event.class;
     let type = $event.type;
 
-    this.currentModule = currentModule;
+    const newPageClass = this.getPageClass(currentClass);
 
-    this.data.forEach((module: any) => {
-      if (module.module_id === currentModule.module_id) {
-          const pickedClass = module.class.find((classTo: any) => {
-          const newClass = this.prevOrNext(type, currentClass, classTo);
-          return newClass;
-        });
-        this.setClass(pickedClass, currentModule);
-        return;
-      } 
-    });
+    if (type === "next") {
+      const newClass = this.getNewClassAndModule(newPageClass, type).newClass;
+      const newModule = this.getNewClassAndModule(newPageClass, type).newModule;
+      this.setClass(newClass, newModule);
+    } else {
+      const newClass = this.getNewClassAndModule(newPageClass, type).newClass;
+      const newModule = this.getNewClassAndModule(newPageClass, type).newModule;
+      this.setClass(newClass, newModule);
+    }
   }
 
-  prevOrNext(type: string, current: any, classTo: any): any {
-    if (type === "next") {
-      console.log("next")
-      return parseInt(current.class_id) + 1 === parseInt(classTo.class_id);
-    } else {
-      console.log("prev")
-
-      return parseInt(current.class_id) - 1 === parseInt(classTo.class_id);
+  getNewClassAndModule(newPageClass: any, type: string): any {
+    const prevIndex =
+      type === "next"
+        ? this.paginationData.indexOf(newPageClass) + 1
+        : this.paginationData.indexOf(newPageClass) - 1;
+    const newClass = this.paginationData[prevIndex];
+    const newModule = {
+      module_id: newClass.moduleId,
+      title: newClass.moduleTitle
     }
 
+    return { newClass, newModule }
   }
+
+  getPageClass(currentClass: any): any {
+    const pageClass = this.paginationData.find((page: any) => {
+      return currentClass.class_id === page.class_id &&
+        currentClass.moduleId === page.moduleId ? page : null
+    });
+
+    return pageClass;
+  }
+
 }

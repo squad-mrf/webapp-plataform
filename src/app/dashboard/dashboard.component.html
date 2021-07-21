@@ -29,8 +29,8 @@
     </div>
 
     <div class="dash__footer">
-        <button mat-raised-button [disabled]="isPrevDisabled()" (click)="prev()">ANTERIOR</button>
-        <button mat-raised-button color="primary" (click)="next()">PRÓXIMA</button>
+        <button mat-raised-button [disabled]="blockPrev" (click)="prev()">ANTERIOR</button>
+        <button mat-raised-button [disabled]="blockNext" color="primary" (click)="next()">PRÓXIMA</button>
     </div>
  
 

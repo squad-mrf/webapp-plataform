@@ -35,6 +35,8 @@
         [class]="currentClass"
         (changeClass)="getClassChange($event)"
         [module]="currentModule"
+        [blockNext]="blockNext"
+        [blockPrev]="blockPrev"
       ></app-dashboard>
       <mat-spinner *ngIf="loading" class="center-object"></mat-spinner>
     </div>

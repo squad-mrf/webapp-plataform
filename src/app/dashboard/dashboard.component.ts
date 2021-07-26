@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getSafeUrl() {
-    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/'+this.class.youtube__video_id);
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/'+this.class.youtube_url.split("?v=")[1]);
   }
 
   next() {

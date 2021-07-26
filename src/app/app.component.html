@@ -14,12 +14,12 @@
     </section>
 
     <mat-list class="module">
-      <ng-container *ngFor="let module of data">
+      <ng-container *ngFor="let module of data2">
         <div class="module__header">
-          <p class="module__header-number">{{ module?.module_id }}</p>
+          <p class="module__header-number">{{ module?.id }}</p>
           <div class="module__header-titles">
               <p>Módulo</p>
-              <h3>{{ module?.title }}</h3>
+              <h3>{{ module?.title_module }}</h3>
           </div>
         </div>
         <mat-list-item

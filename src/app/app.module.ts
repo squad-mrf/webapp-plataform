@@ -8,6 +8,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
+import { ConnectService } from './connect.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -21,9 +23,10 @@ import { MaterialModule } from './shared/material/material.module';
     AppRoutingModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [ConnectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

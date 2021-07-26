@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ConnectService } from './connect.service';
 
 @Component({
   selector: 'app-root',
@@ -37,13 +38,50 @@ export class AppComponent {
       }]
     }];
 
+  data2: any = [
+    {
+      "id": 1,
+      "title_module": "Conheça o scratch",
+      "class":
+        [
+          { 
+            "class_id": 1, 
+            "title": "Oque é scratch", 
+            "youtube_url": "https://www.youtube.com/watch?v=VL9bpCjazT4" 
+          }, 
+          { 
+            "class_id": 2, 
+            "title": "Crie sua conta", 
+            "youtube_url": "https://www.youtube.com/watch?v=VL9bpCjazT4" 
+          }
+        ]
+    },
+    {
+      "id": 2,
+      "title_module": "Animacoes",
+      "class":
+        [
+          { 
+            "class_id": 3,
+            "title": "Estruturas de Blocos",
+            "youtube_url": "https://www.youtube.com/watch?v=VL9bpCjazT4"
+          }
+        ]
+    }]
+
+
   paginationData: any = [];
 
-  constructor() {
-    this.data.forEach((res: any) => {
+  constructor(
+    private connectService: ConnectService
+  ) {
+    this.connectService.getModules().subscribe((res: any) => {
+      console.log(res)
+    });
+    this.data2.forEach((res: any) => {
       res.class.forEach((cl: any) => {
-        cl.moduleId = res.module_id;
-        cl.moduleTitle = res.title;
+        cl.moduleId = res.id;
+        cl.moduleTitle = res.title_module;
         this.paginationData.push(cl);
       })
     })

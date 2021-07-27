@@ -13,61 +13,7 @@ export class AppComponent {
   blockNext: boolean = false;
   blockPrev: boolean = false;
   currentModule: any = {};
-  data: any =
-    [{
-      module_id: 1,
-      title: "Conheça o Scratch",
-      class: [{
-        class_id: 1,
-        title: "O que é Scratch?",
-        youtube__video_id: "09R8_2nJtjg"
-      },
-      {
-        class_id: 2,
-        title: "O que é Scratch2?",
-        youtube__video_id: "09R8_2nJtjg"
-      }]
-    },
-    {
-      module_id: 2,
-      title: "Crie sua conta",
-      class: [{
-        class_id: 1,
-        title: "Crie 1?",
-        youtube__video_id: "zEe0AcpD6QM"
-      }]
-    }];
-
-  data2: any = [
-    {
-      "id": 1,
-      "title_module": "Conheça o scratch",
-      "class":
-        [
-          { 
-            "class_id": 1, 
-            "title": "Oque é scratch", 
-            "youtube_url": "https://www.youtube.com/watch?v=VL9bpCjazT4" 
-          }, 
-          { 
-            "class_id": 2, 
-            "title": "Crie sua conta", 
-            "youtube_url": "https://www.youtube.com/watch?v=VL9bpCjazT4" 
-          }
-        ]
-    },
-    {
-      "id": 2,
-      "title_module": "Animacoes",
-      "class":
-        [
-          { 
-            "class_id": 3,
-            "title": "Estruturas de Blocos",
-            "youtube_url": "https://www.youtube.com/watch?v=VL9bpCjazT4"
-          }
-        ]
-    }]
+  data: any = [];
 
 
   paginationData: any = [];
@@ -75,22 +21,24 @@ export class AppComponent {
   constructor(
     private connectService: ConnectService
   ) {
-    this.connectService.getModules().subscribe((res: any) => {
-      console.log(res)
-    });
-    this.data2.forEach((res: any) => {
-      res.class.forEach((cl: any) => {
-        cl.moduleId = res.id;
-        cl.moduleTitle = res.title_module;
-        this.paginationData.push(cl);
-      })
-    })
+  
+   
   }
 
 
   ngOnInit(): void {
-    this.initialClass();
-    this.hideLoading();
+    this.connectService.getModules().subscribe((res: any) => {
+      this.data = res;
+      this.data.forEach((res: any) => {
+        res.class.forEach((cl: any) => {
+          cl.moduleId = res.id;
+          cl.moduleTitle = res.title_module;
+          this.paginationData.push(cl);
+        })
+      })
+      this.initialClass();
+      this.hideLoading();
+    });
   }
 
   initialClass() {

@@ -16,7 +16,8 @@ export class ConnectService {
 
   getModules(): Observable<any> {
     let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    headers = headers.set("Access-Control-Allow-Origin", "*");
+
     return this.http.get<any>(`${this.url}/getData`, {headers: headers});
   }
 }
